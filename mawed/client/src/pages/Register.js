@@ -3,7 +3,7 @@ import { Form, Input, Button, Row, Col, Checkbox, DatePicker, message } from 'an
 import axios from 'axios';
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined, IdcardOutlined } from '@ant-design/icons';
 import "../styles/RegisterStyles.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -92,6 +92,9 @@ const Register = () => {
                 Register
               </Button>
             </Form.Item>
+            <div style={{ marginTop: '10px', textAlign: 'center' }}>
+              Already have an account? <Link to="/login">Log in</Link>
+            </div>
           </Form>
         </div>
       </Col>

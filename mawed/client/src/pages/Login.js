@@ -1,16 +1,27 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col, Checkbox } from 'antd';
+import { Form, Input, Button, Row, Col, Checkbox, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import "../styles/RegisterStyles.css"; // Ensure you have corresponding CSS for custom styles
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    // Here you might want to call an API to verify user credentials
+  const onFinish = async (values) => {
+    console.log('Received values');
+    try {
+      const response = await axios.post('/api/v1/user/login', values);
+      console.log('Login successful:', response.data);
+      message.success('Login successful');
+      navigate('/'); // Adjust this route to where you want users to go post-login
+    } catch (error) {
+      console.error('Login failed:', error.response || error);
+      message.error(error.response?.data.message || 'Login failed, please try again.');
+    }
   };
+
+
 
   const handleRegisterRedirect = () => {
     navigate('/register'); // Make sure this route matches your router configuration
