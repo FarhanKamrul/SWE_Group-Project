@@ -1,0 +1,12 @@
+/* 
+This file dictates the styles of each of the classes in the Register.js file
+Modify it accordingly after targeting the classes properly.
+*/
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
