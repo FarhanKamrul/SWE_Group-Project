@@ -1,0 +1,24 @@
+/*
+This file dictates the styles of each of the classes in the Register.js file
+Modify it accordingly after targeting the classes properly.
+*/
+
+.login-form-button{
+  background-color: #19163A;
+}
+
+.register-button{
+  background-color: #19163A;
+}
+
+a{
+  color: #19163A;
+}
+
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}

@@ -1,0 +1,43 @@
+.doctor-profile-layout {
+  background: #f0f2f5;
+  min-height: 100vh;
+}
+
+.doctor-profile-content {
+    z-index: 1;
+    margin-top: 140px;
+}
+
+.booking-card {
+    margin-top: 16px;
+}
+
+.time-slots-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-slot-button {
+  flex-grow: 1;
+  margin: 5px;
+  background: #1890ff;
+  /* Primary button color */
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Add hover, focus, and active states for buttons */
+.time-slot-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/* Header and Footer styles can go here as well */
+.header{
+  position: fixed;
+  left: 0px;
+  z-index: 2;
+}
