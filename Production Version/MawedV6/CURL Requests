@@ -1,0 +1,481 @@
+
+Register Clinics
+curl -X POST http://localhost:5000/api/auth/register/clinic -H "Content-Type: application/json" -d '{"name": "aaa", "email": "aaa@aaa.com", "password": "aaa"}'
+
+Login Clinic
+curl -X GET http://localhost:5000/api/clinic/profile \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODk3ODUsImV4cCI6MTQ2NzQ2ODk3ODV9.kYA0NnGNXI3w5JJ0pog5F6cnAbSlzNo803pYqPEINFE" \
+-H "Content-Type: application/json"
+
+curl -X POST http://localhost:5000/api/doctors/add-doctor \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODk3ODUsImV4cCI6MTQ2NzQ2ODk3ODV9.kYA0NnGNXI3w5JJ0pog5F6cnAbSlzNo803pYqPEINFE" \
+-d '{
+    "name": "Doctor Name",
+    "specialty": ["Specialty1", "Specialty2"],
+    "gender": "male",
+    "availableSlots": [
+        {
+            "date": "2022-01-01T00:00:00Z",
+            "isBooked": false
+        }
+    ]
+}'
+
+
+Update Doctor
+curl -X PATCH http://localhost:5000/api/doctors/update-doctor/6634200bfb0967c3d8c9f81a \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODk3ODUsImV4cCI6MTQ2NzQ2ODk3ODV9.kYA0NnGNXI3w5JJ0pog5F6cnAbSlzNo803pYqPEINFE" \
+-d '{
+    "name": "Dr. Alice Johnson",
+    "specialty": ["Cardiology"]
+}'
+
+Update Doctor's languages
+curl -X PATCH http://localhost:5000/api/doctors/update-doctor/66348295faa93982c5158a93 \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODk3ODUsImV4cCI6MTQ2NzQ2ODk3ODV9.kYA0NnGNXI3w5JJ0pog5F6cnAbSlzNo803pYqPEINFE" \
+-d '{
+    "name": "Dr. Micah Richards",
+    "languagesSpoken": ["English", "Spanish", "French"]
+}'
+
+
+Delete Doctor
+curl -X DELETE http://localhost:5000/api/doctors/delete-doctor/6634200bfb0967c3d8c9f81a \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODk3ODUsImV4cCI6MTQ2NzQ2ODk3ODV9.kYA0NnGNXI3w5JJ0pog5F6cnAbSlzNo803pYqPEINFE"
+
+
+
+Logout
+curl -X POST http://localhost:5000/api/auth/logout/clinic \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2NjQ0OTUsImV4cCI6MTQ2NzQ2NjQ0OTV9.N6U9i3qerrV4uAoLsWXxhiPVlv1XEFxcdBmMfLzw-G0"
+
+
+
+//Patient
+
+Patient Register
+curl -X POST http://localhost:5000/api/auth/register/patient -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john@doe.com", "password": "password", "dateOfBirth": "2000-01-01"}'
+
+Patient Login
+curl -X POST http://localhost:5000/api/auth/login/patient -H "Content-Type: application/json" -d '{"email": "john@doe.com", "password": "password"}'
+
+Patient Profile Fetch
+curl -X GET http://localhost:5000/api/auth/patient/profile \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2ODczOTIsImV4cCI6MTQ2NzQ2ODczOTJ9.74N8kSyaUfmi_mjFjgWJsQdtcKNaqaa6WqAwjr1t-I0" \
+-H "Content-Type: application/json"
+
+
+
+Update Patient Profile
+curl -X PATCH http://localhost:5000/api/auth/update-patient \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2OTMwNzgsImV4cCI6MTQ2NzQ2OTMwNzh9.Bq_8c38XoauC4KbcXMelE0Kb92op_dnEGz4i2I_k70Q" \
+-H "Content-Type: application/json" \
+-d '{
+    "name": "Updated Name",
+    "email": "updatedemail@example.com",
+    "dateOfBirth": "1990-01-01"
+}'
+
+Remove Patient
+curl -X DELETE http://localhost:5000/api/delete-patient \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ2OTMwNzgsImV4cCI6MTQ2NzQ2OTMwNzh9.Bq_8c38XoauC4KbcXMelE0Kb92op_dnEGz4i2I_k70Q"
+
+
+
+
+//NEW
+
+To test the entire appointment workflow involving a clinic and a patient, you'll first need to ensure you have routes for registering and logging in both clinics and patients. Once those are set up, you can proceed to test each step, including registering a clinic and a patient, logging them in, adding appointments, and managing those appointments through requests and cancellations.
+
+### Step 1: Register a Clinic
+
+Assuming you already have a registration route for clinics, here's how you can use `curl` to register a new clinic:
+
+```bash
+curl -X POST http://localhost:5000/api/auth/register/clinic \
+-H "Content-Type: application/json" \
+-d '{
+    "name": "Main Street Clinic",
+    "email": "contact@mainstreetclinic.com",
+    "password": "secure1234",
+    "neighborhood": "Al Bateen"
+}'
+```
+
+{"clinic":{"name":"Main Street Clinic","email":"contact@mainstreetclinic.com","password":"secure1234","neighborhood":"Al Bateen","doctors":[],"appointments":[],"_id":"66348e712fd8644ae6147f79","tokens":[],"__v":0}}
+
+
+### Step 2: Register a Patient
+
+Similarly, register a new patient:
+
+```bash
+curl -X POST http://localhost:5000/api/auth/register/patient \
+-H "Content-Type: application/json" \
+-d '{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "dateOfBirth": "1990-01-01"
+}'
+```
+{"patient":{"email":"john.doe@example.com","name":"John Doe","password":"password123","dateOfBirth":"1990-01-01T00:00:00.000Z","_id":"66348e932fd8644ae6147f7b","tokens":[],"__v":0}}
+
+
+
+### Step 3: Log In Both Clinic and Patient
+
+Log in the clinic:
+
+```bash
+curl -X POST http://localhost:5000/api/auth/login/clinic \
+-H "Content-Type: application/json" \
+-d '{
+    "email": "contact@mainstreetclinic.com",
+    "password": "secure1234"
+}'
+```
+
+Clinic Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc
+
+
+
+Log in the patient:
+
+```bash
+curl -X POST http://localhost:5000/api/auth/login/patient \
+-H "Content-Type: application/json" \
+-d '{
+    "email": "john.doe@example.com",
+    "password": "password123"
+}'
+```
+
+Patient Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA1MTIsImV4cCI6MTQ2NzQ3MjA1MTJ9.T025Yl-dyRYTPOjmvEi4OjXVyWHxCXR0ji3x6A9OQ5U
+
+Add a doctor to the clinic:
+curl -X POST http://localhost:5000/api/doctors/add-doctor \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-d '{
+    "name": "Doctor Name",
+    "specialty": ["Specialty1", "Specialty2"],
+    "gender": "male",
+    "availableSlots": [
+        {
+            "date": "2022-01-01T00:00:00Z",
+            "isBooked": false
+        }
+    ]
+}'
+
+{"name":"Doctor Name","specialty":["Specialty1","Specialty2"],"clinic":"66348e712fd8644ae6147f79","availableSlots":[{"date":"2022-01-01T00:00:00.000Z","isBooked":false,"_id":"66348f4f2fd8644ae6147f86"}],"gender":"Male","appointments":[],"languagesSpoken":[],"profilePicture":"profile_pictures\\male\\m1.jpg","_id":"66348f4f2fd8644ae6147f85","__v":0}
+
+
+### Step 4: Add an Appointment
+
+Assuming the clinic's login returns a token, use that token to add an appointment:
+
+```bash
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "66348f4f2fd8644ae6147f86",
+    "appointmentTime": "2024-05-20T10:00:00Z"
+}'
+```
+AppointmentID: 663491d8754221c4559231fe
+
+### Step 5: Patient Requests an Appointment
+
+Assuming the patient's login returns a token, and you have an appointment ID from the previous step:
+
+```bash
+curl -X PATCH http://localhost:5000/api/appointments/request-appointment/663491d8754221c4559231fe 
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA1MTIsImV4cCI6MTQ2NzQ3MjA1MTJ9.T025Yl-dyRYTPOjmvEi4OjXVyWHxCXR0ji3x6A9OQ5U" 
+```
+
+### Step 6: Clinic Confirms the Appointment
+
+Using the clinic's token to confirm the requested appointment:
+
+```bash
+curl -X PATCH http://localhost:5000/api/appointments/confirm-appointment/663491d8754221c4559231fe \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+```
+
+### Step 7: Patient or Clinic Cancels the Appointment
+
+Patient cancels the appointment:
+
+```bash
+curl -X PATCH http://localhost:5000/api/appointments/cancel-appointment/patient/663491d8754221c4559231fe \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA1MTIsImV4cCI6MTQ2NzQ3MjA1MTJ9.T025Yl-dyRYTPOjmvEi4OjXVyWHxCXR0ji3x6A9OQ5U"
+```
+
+Clinic cancels the appointment:
+
+```bash
+curl -X PATCH http://localhost:5000/api/appointments/cancel-appointment/clinic/663491d8754221c4559231fe \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+```
+CANNOT CANCEL AN ALREADY CANCELLED APPOINTMENT GREAT
+
+### Ensuring Full Testing Coverage
+
+Make sure to test:
+- All scenarios are covered (requested, confirmed, free, cancelled by each party).
+- Use correct HTTP status codes and messages are returned for each action.
+- Invalid requests, such as confirming an already confirmed or cancelled appointment, are handled properly.
+
+This comprehensive testing approach will ensure that your appointment management system is robust, user-friendly, and behaves as expected under various conditions.
+
+
+Still allows for adding two appointment slots for the same doctor at the same time, manage that:
+
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "663491d8754221c4559231fe",
+    "appointmentTime": "2024-05-20T10:00:00Z"
+}'
+
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "663491d8754221c4559231fe",
+    "appointmentTime": "2024-05-20T10:10:00Z"
+}'
+
+curl -X PATCH http://localhost:5000/api/appointments/cancel-appointment/clinic/6634989a8b5a4d9a44384525 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+Works now. Great.
+
+
+
+Now, let's add another doctor
+Clinic token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc
+
+
+curl -X POST http://localhost:5000/api/doctors/add-doctor \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-d '{
+    "name": "Doctor A",
+    "specialty": ["Cardiology", "Ophthalmology"],
+    "gender": "male",
+    "availableSlots": [
+        {
+            "date": "2022-01-01T00:00:00Z",
+            "isBooked": false
+        }
+    ]
+}'
+
+
+Doctor ID: 6634bec47ce4f728d6e06693
+
+Add an appointment slot for Doctor A
+
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "6634bec47ce4f728d6e06693",
+    "appointmentTime": "2024-05-20T10:00:00Z"
+}'
+
+Appointment ID: 6634c9418cb2c1811d288150
+
+Patient Registration
+
+curl -X POST http://localhost:5000/api/auth/register/patient -H "Content-Type: application/json" -d '{"name": "John Doe", "email": "john@doe.com", "password": "password", "dateOfBirth": "2000-01-01"}'
+
+Patient Login
+
+curl -X POST http://localhost:5000/api/auth/login/patient -H "Content-Type: application/json" -d '{"email": "john@doe.com", "password": "password"}'
+
+Patient Login Token: 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDMyOTAsImV4cCI6MTQ2NzQ3NDMyOTB9.H8xUlRRoKfZqXcrR4rhFh3ghGB61c9JbiK2GeKz69w0
+
+Book Appointment
+
+curl -X PATCH http://localhost:5000/api/appointments/request-appointment/6634bec47ce4f728d6e06693 -H "Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDMyOTAsImV4cCI6MTQ2NzQ3NDMyOTB9.H8xUlRRoKfZqXcrR4rhFh3ghGB61c9JbiK2GeKz69w0"
+
+
+Clinic Confirms Appointment:
+curl -X PATCH http://localhost:5000/api/appointments/confirm-appointment/6634d80a5c736bb3ccd0f8b8 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+Clinic Cancels Appointment
+
+curl -X PATCH http://localhost:5000/api/appointments/cancel-appointment/clinic/6634c9418cb2c1811d288150 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+# Fetch upcoming appointments for a clinic
+curl -X GET http://localhost:5000/api/appointments/clinic-upcoming-appointments \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+
+curl -X GET http://localhost:5000/api/appointments/clinic-confirmed-appointments \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+
+curl -X PATCH http://localhost:5000/api/complete-appointment/clinic/<appointmentId> \
+-H "Authorization: Bearer " \
+-H "Content-Type: application/json"
+
+
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "6634bec47ce4f728d6e06693",
+    "appointmentTime": "2023-05-20T10:00:00Z"
+}'
+
+Patient token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDMyOTAsImV4cCI6MTQ2NzQ3NDMyOTB9.H8xUlRRoKfZqXcrR4rhFh3ghGB61c9JbiK2GeKz69w0
+
+Appointment ID: 6634eb92c27f0b062c2d48b6
+curl -X PATCH http://localhost:5000/api/appointments/request-appointment/6634eb92c27f0b062c2d48b6 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDMyOTAsImV4cCI6MTQ2NzQ3NDMyOTB9.H8xUlRRoKfZqXcrR4rhFh3ghGB61c9JbiK2GeKz69w0"
+curl -X PATCH http://localhost:5000/api/appointments/confirm-appointment/6634eb92c27f0b062c2d48b6 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+curl -X PATCH http://localhost:5000/api/appointments/confirm-appointment/6634eb92c27f0b062c2d48b6 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+curl -X PATCH http://localhost:5000/api/appointments/complete-appointment/clinic/6634eb92c27f0b062c2d48b6 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc"
+
+curl -X POST http://localhost:5000/api/reviews/post/6634bec47ce4f728d6e06693 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDMyOTAsImV4cCI6MTQ2NzQ3NDMyOTB9.H8xUlRRoKfZqXcrR4rhFh3ghGB61c9JbiK2GeKz69w0" \
+-H "Content-Type: application/json" \
+-d '{
+    "rating": 5,
+    "text": "Great care, 10/10 would recommend",
+    "appointmentId": "6634eb92c27f0b062c2d48b6"
+}'
+
+
+Retesting the entire route from:
+- logging in a clinic
+
+$ curl -X POST http://localhost:5000/api/auth/login/clinic -H "Content-Type: application/json" -d '{                                          "email": "contact@mainstreetclinic.com",
+    "password": "secure1234"
+}'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   945  100   868  100    77  13570   1203 --:--:-- --:--:-- --:--:-- 15000{"clinic":{"_id":"66348e712fd8644ae6147f79","name":"Main Street Clinic","email":"contact@mainstreetclinic.com","password":"secure1234","neighborhood":"Al Bateen","doctors":[],"appointments":[],"tokens":[{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3MjA0NTcsImV4cCI6MTQ2NzQ3MjA0NTd9.zcg1qUgb_zdJywXBo2QmrhaHNdxeC1KPLEX_G7XltCc","_id":"66348ec92fd8644ae6147f7e"},{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU","_id":"6634fd6904f44179cfed9921"}],"__v":2,"activeToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU","notifications":[]},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU"}
+
+Clinic Authorization Token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU
+
+Clinic ID:
+66348e712fd8644ae6147f79
+
+- adding a doctor
+
+curl -X POST http://localhost:5000/api/doctors/add-doctor \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU" \
+-d '{
+    "name": "Doctor Mike",
+    "specialty": ["Cardiologist", "Nephrologist"],
+    "gender": "male",
+    "languagesSpoken": ["English", "Spanish", "French"]
+}'
+
+
+Doctor ID generated: 6634ff72f0211341b7181a80
+
+- adding an appointment slot
+curl -X POST http://localhost:5000/api/appointments/add-appointment \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU" \
+-H "Content-Type: application/json" \
+-d '{
+    "doctorId": "6634ff72f0211341b7181a80",
+    "appointmentTime": "2024-05-20T10:00:00Z"
+}'
+
+
+- fetching free upcoming appointment slots 
+curl -X GET http://localhost:5000/api/appointments/clinic-free-appointments \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU"
+
+
+
+Patient:
+-registers
+curl -X POST http://localhost:5000/api/auth/register/patient -H "Content-Type: application/json" -d '{"name": "Patient Mike", "email": "patient@mike.com", "password": "password", "dateOfBirth": "2000-01-01"}'
+
+
+-logs in
+- mistaken login
+curl -X POST http://localhost:5000/api/auth/login/patient -H "Content-Type: application/json" -d '{"email": "patient@mike.com", "password": "pmike"}'
+- proper login
+curl -X POST http://localhost:5000/api/auth/login/patient -H "Content-Type: application/json" -d '{"email": "patient@mike.com", "password": "password"}'
+
+Patient Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NTAxMTUsImV4cCI6MTQ2NzQ3NTAxMTV9.NQcE4u6hq_VLEDrHBn8NKcVeZZihsHHxYf_eb4zsU5c
+
+-views available appointments
+- by clinic
+curl -X GET http://localhost:5000/api/appointments/available-appointments/clinic/66348e712fd8644ae6147f79 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NTAxMTUsImV4cCI6MTQ2NzQ3NTAxMTV9.NQcE4u6hq_VLEDrHBn8NKcVeZZihsHHxYf_eb4zsU5c"
+
+- by doctor
+curl -X GET http://localhost:5000/api/appointments/available-appointments/doctor/6634ff72f0211341b7181a80 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NTAxMTUsImV4cCI6MTQ2NzQ3NTAxMTV9.NQcE4u6hq_VLEDrHBn8NKcVeZZihsHHxYf_eb4zsU5c"
+
+-requests available appointment
+curl -X PATCH http://localhost:5000/api/appointments/request-appointment/663500d3f1cf45b11de6f163 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NTAxMTUsImV4cCI6MTQ2NzQ3NTAxMTV9.NQcE4u6hq_VLEDrHBn8NKcVeZZihsHHxYf_eb4zsU5c"
+
+
+Clinic:
+-views requested appointments
+
+curl -X GET http://localhost:5000/api/appointments/clinic-requested-appointments \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU"
+
+-confirms requested appointment
+
+curl -X PATCH http://localhost:5000/api/appointments/confirm-appointment/663500d3f1cf45b11de6f163 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU"
+
+-completes appointment
+
+curl -X PATCH http://localhost:5000/api/appointments/complete-appointment/clinic/663500d3f1cf45b11de6f163 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NDg3NzcsImV4cCI6MTQ2NzQ3NDg3Nzd9.RTta39nQ0ZhoofzZNl2Jxux5qDpv0yiERwcEznPsFtU"
+
+
+Patient:
+-posts a review
+
+curl -X POST http://localhost:5000/api/reviews/post/6634ff72f0211341b7181a80 \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTQ3NTAxMTUsImV4cCI6MTQ2NzQ3NTAxMTV9.NQcE4u6hq_VLEDrHBn8NKcVeZZihsHHxYf_eb4zsU5c" \
+-H "Content-Type: application/json" \
+-d '{
+    "rating": 5,
+    "text": "Great care, 10/10 would recommend",
+    "appointmentId": "6634eb92c27f0b062c2d48b6"
+}'
+
+
+
+
+//Implement clinic ratings later.
+
+
+// Searching
+curl -X GET "http://localhost:5000/api/doctors/search-doctors?keyword=Mike&specialty=Cardiologist&rating=4.5&neighborhood=Al%Bateen%20Island&sort=rating" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+
+
+curl -X GET "http://localhost:5000/api/search-doctors?keyword=Mike&specialty=Cardiologist&neighborhood=Al%20Bateen" \
+     -H "Content-Type: application/json"
+
+
+
+
+
