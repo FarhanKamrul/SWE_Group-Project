@@ -1,0 +1,116 @@
+body{
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  background-color: white;
+}
+.b2 {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 15px;
+}
+.app-name {
+  font-size: 26px;
+  color: white;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  margin-left: 50px;
+}
+.icon {
+  display:inline-flex;
+  padding: 10px;
+  background-color: #1f1d7a;
+  color: white;
+  border-color: #19163a;
+  text-decoration: none;
+  margin-right: 50px;
+}
+
+.icon a{
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+}
+.t-bar-admin {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 540px;
+  padding: 20px;
+  padding-top: 50px;
+  z-index: 2;
+  /* Apply gradient background from dark blue to mid-tone blue */
+  background-image: linear-gradient(to bottom right, #19163A, #2E6AA7);
+  border-bottom-right-radius: 61px;
+  border-bottom-left-radius: 61px;
+  /* Other styles */
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.topbar-expanded-admin {
+  /* Expanded height */
+  height: 170px !important; /* Use !important to override other styles if necessary */
+}
+.user-actions {
+  position: fixed;
+  right: 30px;
+  top: 50px;
+}
+
+.header {
+  margin-top: 170px;
+  background-color: white;
+}
+
+
+.icon{
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2E6AA7 !important ;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.icon:hover {
+    background-color: #26548D  !important ;
+}
+.button{
+  background-color: white;
+  border: None;
+}
+.page-title{
+  color: black;
+  margin-top: 270px;
+  font-size: 20px;
+}
+/* CSS for AppointmentItem component */
+.appointment-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* CSS for Admin component */
+.page-title {
+  margin-bottom: 20px;
+}
+
+.appointment-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

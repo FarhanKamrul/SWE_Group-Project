@@ -1,0 +1,164 @@
+body{
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  background-color: white;
+  color: #19163A;
+}
+
+
+
+
+.top-bar {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 140px;
+  background-color: #19163A;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 50px;
+  background-image: linear-gradient(to bottom right, #19163A, #2E6AA7);
+  border-bottom: 1px solid  #19163A;
+  border-bottom-right-radius: 61px;
+  border-bottom-left-radius: 61px;
+  z-index: 2;
+  align-items: center;
+}
+
+.app-name {
+  font-size: 26px;
+  color: white;
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  margin-left: 50px;
+}
+
+.b2 {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 15px;
+}
+
+.icon {
+  display:inline-flex;
+  padding: 10px;
+  background-color: #1f1d7a;
+  color: white;
+  border-color: #19163a;
+  text-decoration: none;
+  margin-right: 50px;
+}
+
+.icon a{
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+}
+
+.clinic-details {
+  flex-grow: 1;
+}
+
+.name{
+  font-size: 21px;
+  color: #19163A;
+}
+.info{
+  color: #19163A;
+  font-weight: lighter;
+}
+.clinic-info {
+    position: relative;
+    top: 150px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: center; /* Center horizontally */
+    border: 1px solid black ;
+    padding: 20px;
+    max-width: 700px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    z-index: 1;
+}
+
+.clinic-info img {
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+.tabs {
+  max-width: 745px;
+  width: 49.2%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  justify-content: space-around;
+  background-color: white;
+  border: 1px solid black ;
+  color: #19163A;
+}
+
+.tab {
+  padding: 10px;
+  cursor: pointer;
+  color: #19163A;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.tab:hover{
+  color: #19163A;
+  border-bottom: 2px solid #19163A;
+  padding-bottom: 8px;
+}
+
+.content-section {
+  padding: 20px;
+  max-width: 745px;
+  width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-section h2 {
+  margin-bottom: 10px;
+}
+
+.content-box {
+  height: auto; /* Adjust as needed */
+  background-color: #ffffff;
+  border: 1px solid black ;
+}
+.a1{
+  text-decoration: none;
+}
+.a1:hover{
+  text-decoration: none;
+}
+.clinic-info:hover {
+  border-color:#26548D  ;
+
+}
+.profile{
+  color: grey;
+  font-weight: lighter;
+}
+.bio{
+  font-weight: lighter;
+  font-size: 17px;
+  color: grey;
+}
+a{
+  text-decoration: none;
+}

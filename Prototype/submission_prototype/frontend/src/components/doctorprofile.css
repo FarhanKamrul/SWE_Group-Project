@@ -1,0 +1,30 @@
+body{
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  background-color: white;
+  color: #19163A;
+}
+.content-box{
+  padding: 30px;
+  padding-top: 50px;
+  padding-bottom: 300px;
+
+}
+.doctors{
+  padding: 30px;
+  padding-top: 0px;
+  padding-bottom: 1450px;
+}
+.a1{
+  text-decoration: none;
+}
+.profile{
+  color: grey;
+  font-weight: lighter;
+}
+.bio{
+  font-weight: lighter;
+  font-size: 17px;
+  color: #19163A;
+}

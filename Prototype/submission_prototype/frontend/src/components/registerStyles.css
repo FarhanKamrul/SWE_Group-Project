@@ -1,0 +1,18 @@
+
+.new{
+   background-color: #ffffff; /* White background color */
+   padding: 1rem; /* Equivalent to p-3 in Bootstrap (padding of 3 units) */
+   border-radius: 0.5rem; /* Equivalent to rounded in Bootstrap (rounded corners) */
+   
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow with a slight blur effect */
+   text-align: center;
+   position: fixed;
+   top: 25%;
+   left: 30%;
+
+
+
+}
+body{
+  background-color: white;
+}
