@@ -59,7 +59,7 @@ const ClinicDashboard = () => {
             key: 'action',
             render: (_, record) => (
                 <Button type="link">
-                    <Link to={`/manage-doctor/${record._id}`}>Manage Doctor <SettingOutlined /></Link>
+                    <Link to={`/clinic/dashboard/manage-doctor/${record._id}`}>Manage Doctor <SettingOutlined /></Link>
                 </Button>
             )
         }

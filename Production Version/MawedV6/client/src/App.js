@@ -11,6 +11,7 @@ import ClinicLogin from './components/ClinicLogin';
 import ClinicRegistration from './components/ClinicRegistration';
 import ClinicDashboard from './components/ClinicDashboard';
 import AddDoctorPage from './components/ClinicAddDoctor';
+import ClinicManageDoctor from './components/ClinicManageDoctor';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/clinic/login' element={<ClinicLogin />} />
         <Route path='/clinic/dashboard' element={<ClinicDashboard />} />
         <Route path='/clinic/dashboard/add-doctor' element={<AddDoctorPage />} />
+        <Route path='/clinic/dashboard/manage-doctor/:id' element={<ClinicManageDoctor />} />
         
       </Routes>
     </Router>
